@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import torch
-import yaml
+# import yaml
 from PIL import Image, ImageDraw, ImageFont
 from scipy.signal import butter, filtfilt
 
@@ -319,27 +319,28 @@ def plot_labels(labels, names=(), save_dir=Path(''), loggers=None):
 
 
 def plot_evolution(yaml_file='data/hyp.finetune.yaml'):  # from utils.plots import *; plot_evolution()
+    print('!!! because of contest this function is removed !!!')
     # Plot hyperparameter evolution results in evolve.txt
-    with open(yaml_file) as f:
-        hyp = yaml.load(f, Loader=yaml.SafeLoader)
-    x = np.loadtxt('evolve.txt', ndmin=2)
-    f = fitness(x)
-    # weights = (f - f.min()) ** 2  # for weighted results
-    plt.figure(figsize=(10, 12), tight_layout=True)
-    matplotlib.rc('font', **{'size': 8})
-    for i, (k, v) in enumerate(hyp.items()):
-        y = x[:, i + 7]
-        # mu = (y * weights).sum() / weights.sum()  # best weighted result
-        mu = y[f.argmax()]  # best single result
-        plt.subplot(6, 5, i + 1)
-        plt.scatter(y, f, c=hist2d(y, f, 20), cmap='viridis', alpha=.8, edgecolors='none')
-        plt.plot(mu, f.max(), 'k+', markersize=15)
-        plt.title('%s = %.3g' % (k, mu), fontdict={'size': 9})  # limit to 40 characters
-        if i % 5 != 0:
-            plt.yticks([])
-        print('%15s: %.3g' % (k, mu))
-    plt.savefig('evolve.png', dpi=200)
-    print('\nPlot saved as evolve.png')
+    # with open(yaml_file) as f:
+    #     hyp = yaml.load(f, Loader=yaml.SafeLoader)
+    # x = np.loadtxt('evolve.txt', ndmin=2)
+    # f = fitness(x)
+    # # weights = (f - f.min()) ** 2  # for weighted results
+    # plt.figure(figsize=(10, 12), tight_layout=True)
+    # matplotlib.rc('font', **{'size': 8})
+    # for i, (k, v) in enumerate(hyp.items()):
+    #     y = x[:, i + 7]
+    #     # mu = (y * weights).sum() / weights.sum()  # best weighted result
+    #     mu = y[f.argmax()]  # best single result
+    #     plt.subplot(6, 5, i + 1)
+    #     plt.scatter(y, f, c=hist2d(y, f, 20), cmap='viridis', alpha=.8, edgecolors='none')
+    #     plt.plot(mu, f.max(), 'k+', markersize=15)
+    #     plt.title('%s = %.3g' % (k, mu), fontdict={'size': 9})  # limit to 40 characters
+    #     if i % 5 != 0:
+    #         plt.yticks([])
+    #     print('%15s: %.3g' % (k, mu))
+    # plt.savefig('evolve.png', dpi=200)
+    # print('\nPlot saved as evolve.png')
 
 
 def profile_idetection(start=0, stop=0, labels=(), save_dir=''):

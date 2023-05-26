@@ -2,7 +2,7 @@
 
 import numpy as np
 import torch
-import yaml
+# import yaml
 from scipy.cluster.vq import kmeans
 from tqdm import tqdm
 
@@ -100,13 +100,13 @@ def kmean_anchors(path='./data/coco.yaml', n=9, img_size=640, thr=4.0, gen=1000,
             print('%i,%i' % (round(x[0]), round(x[1])), end=',  ' if i < len(k) - 1 else '\n')  # use in *.cfg
         return k
 
-    if isinstance(path, str):  # *.yaml file
-        with open(path) as f:
-            data_dict = yaml.load(f, Loader=yaml.SafeLoader)  # model dict
-        from utils.datasets import LoadImagesAndLabels
-        dataset = LoadImagesAndLabels(data_dict['train'], augment=True, rect=True)
-    else:
-        dataset = path  # dataset
+    # if isinstance(path, str):  # *.yaml file
+    #     with open(path) as f:
+    #         data_dict = yaml.load(f, Loader=yaml.SafeLoader)  # model dict
+    #     from utils.datasets import LoadImagesAndLabels
+    #     dataset = LoadImagesAndLabels(data_dict['train'], augment=True, rect=True)
+    # else:
+    dataset = path  # dataset
 
     # Get label wh
     shapes = img_size * dataset.shapes / dataset.shapes.max(1, keepdims=True)
